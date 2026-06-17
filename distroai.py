@@ -1,3 +1,4 @@
+
 #GNU GPL 3.0v = sizde aynı lisans altında kodlarla istediğinizi yapabilirsiniz.
 
 import torch
@@ -23,59 +24,102 @@ distro_isimleri = {
 }
 
 X = torch.tensor([
-    # --- Linux Mint
+    # --- Linux Mint (0): Yeni başlayan, eski/zayıf donanım, kararlılık, kurumsal önemsiz.
     [0, 0, 0, 0, 0, 1, 0, 0],
     [0, 0, 0, 0, 0, 1, 0, 1],
     [0, 1, 0, 0, 0, 0, 0, 0],
     [1, 0, 0, 0, 0, 1, 0, 0],
     [0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 1, 0, 1, 0, 0],  
+    [0, 0, 0, 1, 0, 1, 0, 1],   
+    [0, 0, 0, 0, 0, 1, 1, 0],   
+    [0, 0, 1, 0, 0, 1, 0, 0],  
+    [0, 1, 0, 0, 0, 1, 0, 0],  
+    [1, 0, 0, 0, 0, 1, 0, 0],  
+    [0, 0, 0, 0, 0, 1, 0, 0],
 
-    # --- Ubuntu
+    # --- Ubuntu (1): Deneyimli/orta deneyimli, kararlılık+kurumsal destek seven, oyun değil.
     [1, 1, 0, 0, 0, 0, 0, 1],
     [1, 1, 0, 0, 1, 0, 0, 1],
     [0, 1, 0, 0, 0, 0, 0, 1],
     [1, 1, 0, 0, 0, 1, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 1],
+    [1, 1, 0, 0, 0, 0, 0, 0],   
+    [0, 1, 0, 0, 1, 0, 0, 1],   
+    [1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 1],   
+    [0, 1, 0, 0, 0, 0, 0, 0],   
+    [1, 1, 0, 1, 0, 0, 0, 1],   
+    [1, 0, 0, 0, 0, 0, 0, 1],
 
-    # --- Fedora
+    # --- Fedora (2): Deneyimli, güncel paketleri sever ama kararlılık da ister, oyun değil.
     [1, 1, 1, 0, 0, 0, 0, 0],
     [1, 1, 1, 0, 1, 0, 1, 0],
     [1, 1, 1, 0, 0, 0, 1, 1],
     [1, 1, 1, 0, 1, 0, 0, 1],
     [1, 1, 0, 0, 0, 0, 1, 0],
+    [1, 1, 1, 0, 0, 0, 0, 1],   
+    [1, 0, 1, 0, 0, 0, 1, 0],   
+    [1, 1, 1, 0, 1, 0, 0, 0],   
+    [1, 1, 1, 1, 0, 0, 0, 1],   
+    [1, 1, 0, 0, 1, 0, 1, 0],   
+    [1, 0, 1, 0, 0, 1, 0, 0],   
+    [1, 1, 1, 0, 0, 0, 1, 0],
 
-    # --- CachyOS
+    # --- CachyOS (3): Deneyimli, güçlü donanım, performans/oyun odaklı, NVIDIA olabilir.
+    # Donanım zayıfsa veya deneyim yoksa bu sınıfa düşmemeli (Mint/Ubuntu'ya kayar).
     [1, 1, 1, 1, 1, 0, 1, 0],
     [1, 1, 1, 1, 0, 0, 1, 0],
     [1, 1, 0, 1, 1, 0, 0, 0],
     [1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 1, 0],
+    [1, 1, 1, 1, 0, 0, 1, 0],   
+    [1, 1, 0, 1, 0, 0, 0, 0],   
+    [1, 1, 1, 1, 1, 0, 0, 1],   
+    [1, 1, 0, 1, 1, 0, 1, 0],
+    [1, 1, 1, 1, 0, 0, 1, 1],
+    [1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 0],
+    [1, 1, 1, 1, 1, 0, 0, 0],
 
-    # --- Arch Linux 
+    # --- Arch Linux (4): Deneyimli, macera/özelleştirme sever, güncellik önemli, kurumsal destek önemsiz.
     [1, 1, 1, 0, 0, 0, 1, 0],
     [1, 1, 1, 1, 0, 0, 1, 0],
     [1, 0, 1, 0, 0, 0, 1, 0],
     [1, 1, 1, 0, 1, 0, 1, 0],
     [1, 1, 1, 1, 1, 0, 1, 0],
+    [1, 0, 1, 0, 0, 1, 1, 0],   
+    [1, 1, 1, 0, 0, 0, 1, 1],   
+    [1, 1, 1, 1, 0, 0, 1, 1],
+    [1, 0, 1, 1, 0, 0, 1, 0],   
+    [1, 1, 0, 0, 0, 0, 1, 0],   
+    [1, 1, 1, 0, 1, 0, 1, 0],
+    [1, 0, 0, 0, 0, 0, 1, 0],
 
-    # --- openSUSE 
+    # --- openSUSE (5): Deneyimli, kararlılık + kurumsal destek, macera istemiyor.
     [1, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 1],
     [1, 1, 0, 0, 1, 0, 0, 1],
     [1, 1, 1, 0, 0, 0, 0, 1],
     [1, 1, 0, 0, 0, 1, 1, 1],
+    [1, 1, 1, 0, 1, 0, 0, 1],   
+    [1, 0, 0, 0, 0, 0, 0, 1],   
+    [1, 1, 0, 1, 0, 0, 0, 1],   
+    [1, 1, 0, 0, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 0, 0, 1, 0, 1],
 ], dtype=torch.float32)
 
 Y = torch.tensor(
-    [0]*5 + [1]*5 + [2]*5 + [3]*5 + [4]*5 + [5]*5,
+    [0]*12 + [1]*12 + [2]*12 + [3]*12 + [4]*12 + [5]*12,
     dtype=torch.long
 )
 
 class DistroAI(nn.Module):
-    def __init__(self, input_size=8, num_classes=6, dropout=0.2): # 8 soru var.
+    def __init__(self, input_size=8, num_classes=6, dropout=0.2):
         super(DistroAI, self).__init__()
         self.network = nn.Sequential(
-            nn.Linear(input_size, 32), #Burası katmanlarımız dataseti geliştirdiğinizde burayıda derinleştirmelisiniz
+            nn.Linear(input_size, 32),
             nn.ReLU(),
             nn.Dropout(dropout),
             nn.Linear(32, 16),
@@ -106,7 +150,7 @@ for epoch in range(EPOCHS):
             acc = (output.argmax(dim=1) == Y).float().mean().item()
         print(f"[Epoch {epoch+1}/{EPOCHS}] Loss: {loss.item():.4f} | Eğitim Doğruluğu: %{acc*100:.1f}")
 
-model.eval()  
+model.eval() 
 print("LINUX DISTRO TAVSİYE YAPAY ZEKASINA HOŞ GELDİNİZ")
 print("Lütfen soruları 'E' (Evet) veya 'H' (Hayır) olarak yanıtlayın.\n")
 
@@ -141,7 +185,7 @@ print("\n" + "="*40)
 print("YAPAY ZEKA ANALİZ SONUCU:")
 print(f"Önerilen Dağıtım: ** {distro_isimleri[tahmin_indeks]} **")
 print("-"*40)
-print("diğer ihtimaller:")
+print("Diğer ihtimaller:")
 sirali = sorted(distro_isimleri.items(), key=lambda kv: olasiliklar[kv[0]].item(), reverse=True)
 for idx, isim in sirali:
     print(f"- {isim}: %{olasiliklar[idx].item()*100:.1f}")
