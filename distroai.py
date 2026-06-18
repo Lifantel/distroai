@@ -4,6 +4,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import csv
 
 # ---------------------------------------------------------
 # 1. MODEL TANIMLAMASI VE EĞİTİM VERİSİ
@@ -23,97 +24,16 @@ distro_isimleri = {
     5: "openSUSE",
 }
 
-X = torch.tensor([
-    # --- Linux Mint (0): Yeni başlayan, eski/zayıf donanım, kararlılık, kurumsal önemsiz.
-    [0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 1],
-    [0, 1, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0, 0],
-    [0, 0, 0, 1, 0, 1, 0, 0],  
-    [0, 0, 0, 1, 0, 1, 0, 1],   
-    [0, 0, 0, 0, 0, 1, 1, 0],   
-    [0, 0, 1, 0, 0, 1, 0, 0],  
-    [0, 1, 0, 0, 0, 1, 0, 0],  
-    [1, 0, 0, 0, 0, 1, 0, 0],  
-    [0, 0, 0, 0, 0, 1, 0, 0],
+X_list, Y_list = [], []
+with open("dataset.csv", "r") as f:
+    reader = csv.reader(f)
+    next(reader)  # başlık satırını ("q1,q2,...,label") atla
+    for row in reader:
+        X_list.append([float(v) for v in row[:8]])
+        Y_list.append(int(row[8]))
 
-    # --- Ubuntu (1): Deneyimli/orta deneyimli, kararlılık+kurumsal destek seven, oyun değil.
-    [1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 0, 0, 1, 0, 0, 1],
-    [0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 0, 0, 0, 1, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0],   
-    [0, 1, 0, 0, 1, 0, 0, 1],   
-    [1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1, 1, 0, 1],   
-    [0, 1, 0, 0, 0, 0, 0, 0],   
-    [1, 1, 0, 1, 0, 0, 0, 1],   
-    [1, 0, 0, 0, 0, 0, 0, 1],
-
-    # --- Fedora (2): Deneyimli, güncel paketleri sever ama kararlılık da ister, oyun değil.
-    [1, 1, 1, 0, 0, 0, 0, 0],
-    [1, 1, 1, 0, 1, 0, 1, 0],
-    [1, 1, 1, 0, 0, 0, 1, 1],
-    [1, 1, 1, 0, 1, 0, 0, 1],
-    [1, 1, 0, 0, 0, 0, 1, 0],
-    [1, 1, 1, 0, 0, 0, 0, 1],   
-    [1, 0, 1, 0, 0, 0, 1, 0],   
-    [1, 1, 1, 0, 1, 0, 0, 0],   
-    [1, 1, 1, 1, 0, 0, 0, 1],   
-    [1, 1, 0, 0, 1, 0, 1, 0],   
-    [1, 0, 1, 0, 0, 1, 0, 0],   
-    [1, 1, 1, 0, 0, 0, 1, 0],
-
-    # --- CachyOS (3): Deneyimli, güçlü donanım, performans/oyun odaklı, NVIDIA olabilir.
-    # Donanım zayıfsa veya deneyim yoksa bu sınıfa düşmemeli (Mint/Ubuntu'ya kayar).
-    [1, 1, 1, 1, 1, 0, 1, 0],
-    [1, 1, 1, 1, 0, 0, 1, 0],
-    [1, 1, 0, 1, 1, 0, 0, 0],
-    [1, 1, 1, 1, 1, 0, 0, 0],
-    [1, 1, 1, 1, 0, 0, 1, 0],   
-    [1, 1, 0, 1, 0, 0, 0, 0],   
-    [1, 1, 1, 1, 1, 0, 0, 1],   
-    [1, 1, 0, 1, 1, 0, 1, 0],
-    [1, 1, 1, 1, 0, 0, 1, 1],
-    [1, 1, 1, 1, 1, 0, 1, 1],
-    [1, 1, 0, 1, 0, 0, 1, 0],
-    [1, 1, 1, 1, 1, 0, 0, 0],
-
-    # --- Arch Linux (4): Deneyimli, macera/özelleştirme sever, güncellik önemli, kurumsal destek önemsiz.
-    [1, 1, 1, 0, 0, 0, 1, 0],
-    [1, 1, 1, 1, 0, 0, 1, 0],
-    [1, 0, 1, 0, 0, 0, 1, 0],
-    [1, 1, 1, 0, 1, 0, 1, 0],
-    [1, 1, 1, 1, 1, 0, 1, 0],
-    [1, 0, 1, 0, 0, 1, 1, 0],   
-    [1, 1, 1, 0, 0, 0, 1, 1],   
-    [1, 1, 1, 1, 0, 0, 1, 1],
-    [1, 0, 1, 1, 0, 0, 1, 0],   
-    [1, 1, 0, 0, 0, 0, 1, 0],   
-    [1, 1, 1, 0, 1, 0, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1, 0],
-
-    # --- openSUSE (5): Deneyimli, kararlılık + kurumsal destek, macera istemiyor.
-    [1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 1],
-    [1, 1, 0, 0, 1, 0, 0, 1],
-    [1, 1, 1, 0, 0, 0, 0, 1],
-    [1, 1, 0, 0, 0, 1, 1, 1],
-    [1, 1, 1, 0, 1, 0, 0, 1],   
-    [1, 0, 0, 0, 0, 0, 0, 1],   
-    [1, 1, 0, 1, 0, 0, 0, 1],   
-    [1, 1, 0, 0, 1, 1, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1],
-    [1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 0, 0, 1, 0, 1],
-], dtype=torch.float32)
-
-Y = torch.tensor(
-    [0]*12 + [1]*12 + [2]*12 + [3]*12 + [4]*12 + [5]*12,
-    dtype=torch.long
-)
+X = torch.tensor(X_list, dtype=torch.float32)
+Y = torch.tensor(Y_list, dtype=torch.long)
 
 class DistroAI(nn.Module):
     def __init__(self, input_size=8, num_classes=6, dropout=0.2):
