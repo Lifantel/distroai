@@ -44,6 +44,6 @@ yeterlidir.
 
 ## Not
 
-Eğitim verisi küçük ve elle hazırlanmış örneklerden oluştuğunda, yapay
+Dataset Claude ile yazılmıştır. Eğitim verisi küçük örneklerden oluştuğundan, yapay
 nöron her zaman mükemmel sonuç vermeyebilir. Daha fazla örnek eklemek
 kararlarını daha tutarlı hale getirir.
