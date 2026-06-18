@@ -1,3 +1,9 @@
+> [!CAUTION]
+> Nöronu besleyen datasette cezalandırma sisteminde bir takım sorunlar yaşıyorum, en yakın zamanda çözeceğim.
+ 
+---
+
+
 # Linux Distro Tavsiye Yapay Nöronu
 
 Bu proje, kullanıcıya sorduğu 8 soruya göre hangi Linux dağıtımının
