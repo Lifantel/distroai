@@ -10,8 +10,6 @@ import csv
 # 1. MODEL TANIMLAMASI VE EĞİTİM VERİSİ
 # ---------------------------------------------------------
 # Soru Mantığı (Evet=1, Hayır=0):
-# torch sensor kısmıda bu sorulara verilen cevapların kombinasyonudur Ör: 1. soru için hayır (0), 2 = (0) .... Altı tane sorunun hepsi hayır
-# yani 0 olursa loses bizi en yakın sonuç olan linux mint e götürüyor.
 # Dataseti genişletirseniz (X tensörünü ve Y yi) soruları arttırıp aynı oranda distroların kombinasyanunu arttırırsanız model dahada gelişir.
 # Not: Matematiğini bende bilmiyorum matematiksel hata yaptıysam kusura bakmayın googledan baktım.
 
