@@ -1,8 +1,3 @@
-> [!CAUTION]
-> Nöronu besleyen datasette cezalandırma sisteminde bir takım sorunlar yaşıyorum, en yakın zamanda çözeceğim.
- 
----
-
 
 # Linux Distro Tavsiye Yapay Nöronu
 
@@ -22,6 +17,10 @@ geçirir. Çıktı olarak altı dağıtımdan (Mint, Ubuntu, Fedora, CachyOS,
 Arch, openSUSE) hangisinin en uygun olduğunu yüzdelik olasılıklarla
 gösterir.
 
+Not: Datauret.py dosyasındaki ağrlıkları değiştirerek modelin çıktılarını da 
+değiştirirsiniz bir soruda bir distro için ne kadar çok ağrlık verirseniz o 
+soruda o kadar daha çok o distroyu ödülllendirir cezalandırırsanızda bir o kadar cezalandırır.
+
 ## Desteklenen Dağıtımlar
 
 - Linux Mint
@@ -30,6 +29,8 @@ gösterir.
 - CachyOS
 - Arch Linux
 - openSUSE
+- Pop_OS
+- Kali Linux
 
 ## Çalıştırma
 
