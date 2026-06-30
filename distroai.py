@@ -11,8 +11,6 @@ from sklearn.model_selection import train_test_split
 # 1. MODEL TANIMLAMASI VE EĞİTİM VERİSİ
 # ---------------------------------------------------------
 # Soru Mantığı (Evet=1, Hayır=0):
-# Dataseti genişletirseniz (X tensörünü ve Y yi) soruları arttırıp aynı oranda distroların kombinasyanunu arttırırsanız model dahada gelişir.
-# Not: Matematiğini bende bilmiyorum matematiksel hata yaptıysam kusura bakmayın googledan baktım.
 
 distro_isimleri = {
     0: "Linux Mint",
@@ -30,8 +28,8 @@ with open("dataset.csv", "r") as f:
     reader = csv.reader(f)
     next(reader)  # başlık satırını ("q1,q2,...,label") atla
     for row in reader:
-        X_list.append([float(v) for v in row[:9]])
-        Y_list.append(int(row[9]))
+        X_list.append([float(v) for v in row[:10]])
+        Y_list.append(int(row[10]))
 
 X = torch.tensor(X_list, dtype=torch.float32)
 Y = torch.tensor(Y_list, dtype=torch.long)
@@ -41,7 +39,7 @@ X_train, X_val, Y_train, Y_val = train_test_split(
 )
 
 class DistroAI(nn.Module):
-    def __init__(self, input_size=9, num_classes=8, dropout=0.2):
+    def __init__(self, input_size=10, num_classes=8, dropout=0.2):
         super(DistroAI, self).__init__()
         self.network = nn.Sequential(
             nn.Linear(input_size, 32),
@@ -88,7 +86,8 @@ sorular = [
     "6. Sistemin çok az RAM ve CPU tüketmesi sizin için kritik mi? (E/H): ",
     "7. Macera/özelleştirme istiyor musunuz? (E/H): ",
     "8. Büyük bir şirket desteği olsun mu? (E/H): ",
-    "9. Siber güvenlik veya penetrasyon testi yapmak istiyor musunuz? (E/H): "
+    "9. Siber güvenlik veya penetrasyon testi yapmak istiyor musunuz? (E/H): ",
+    "10. Windows benzeri olsun mu? (E/H):"
 ]
 
 kullanici_cevaplari = []
