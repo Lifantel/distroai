@@ -36,7 +36,7 @@ soruda o kadar daha çok o distroyu ödülllendirir cezalandırırsanızda bir o
 
 ```bash
 pip install torch
-python3 distro_ai.py
+python3 distroai.py
 ```
 
 Sorulara `E` (Evet) veya `H` (Hayır) yazarak cevap verin, model size
