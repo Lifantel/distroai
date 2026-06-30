@@ -1,0 +1,78 @@
+import itertools
+import random
+import csv
+from collections import Counter, defaultdict
+
+# Sorular:
+# q1: Linux/terminal tecrübesi
+# q2: Güçlü/güncel donanım
+# q3: Kararlılıktan çok en yeni güncellemeler önemli mi 
+# q4: Oyun / performans odaklı kullanım
+# q5: NVIDIA ekran kartı var mı
+# q6: Düşük RAM/CPU tüketimi kritik mi (hafiflik)
+# q7: Macera / özelleştirme isteği
+# q8: Büyük şirket desteği önemli mi
+# q9: Siber güvenlik / pentest ilgisi
+
+agirliklar = {
+    #               q1   q2   q3   q4   q5   q6   q7   q8   q9
+    0: [          -1,  -1,  -1,  -1,   0,   2,  -1,   0,  -1],  # Linux Mint
+    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,  -1],  # Ubuntu
+    2: [           1,   1,   2,   0,  -1,   0,   2,   1,  -1],  # Fedora
+    3: [           1,   1,   1,   2,   1,  -1,   0,  -1,  -1],  # CachyOS
+    4: [           2,   1,   1,   0,   0,   0,   2,  -1,  -1],  # Arch Linux
+    5: [           1,  -1,  -1,  -1,   0,   1,   0,   2,  -1],  # openSUSE
+    6: [          -1,   1,   0,   2,   2,  -1,  -1,   1,  -1],  # Pop!_OS
+    7: [           2,   0,   0,  -1,   0,  -1,   1,  -1,   3],  # Kali Linux
+}
+
+distro_isimleri = {
+    0: "Linux Mint", 1: "Ubuntu", 2: "Fedora", 3: "CachyOS",
+    4: "Arch Linux", 5: "openSUSE", 6: "Pop!_OS", 7: "Kali Linux"
+}
+
+def etiketle(cevaplar):
+    en_iyi_puan, en_iyi_label = None, None
+    for label, w in agirliklar.items():
+        puan = sum(c * wi for c, wi in zip(cevaplar, w))
+        if en_iyi_puan is None or puan > en_iyi_puan:
+            en_iyi_puan, en_iyi_label = puan, label
+    return en_iyi_label
+
+vektor_havuzu = defaultdict(list)
+for cevaplar in itertools.product([0, 1], repeat=9):
+    label = etiketle(cevaplar)
+    vektor_havuzu[label].append(cevaplar)
+
+print("Her sınıfın kapladığı benzersiz vektör sayısı:")
+for l in sorted(vektor_havuzu):
+    print(f"  {distro_isimleri[l]}: {len(vektor_havuzu[l])}")
+random.seed(42)
+HEDEF_HER_SINIF = 1000
+satirlar = []
+for label, vektorler in vektor_havuzu.items():
+    for _ in range(HEDEF_HER_SINIF):
+        secilen = random.choice(vektorler)
+        satirlar.append(list(secilen) + [label])
+
+random.shuffle(satirlar)
+
+with open("dataset.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["q1","q2","q3","q4","q5","q6","q7","q8","q9","label"])
+    writer.writerows(satirlar)
+
+
+kontrol = {}
+celiski = 0
+for row in satirlar:
+    anahtar = tuple(row[:9])
+    etiket = row[9]
+    if anahtar in kontrol and kontrol[anahtar] != etiket:
+        celiski += 1
+    kontrol[anahtar] = etiket
+
+print("\nToplam satır:", len(satirlar))
+print("Çelişkili satır sayısı:", celiski)
+print("\nSınıf dağılımı (dataset.csv içinde):")
+print(Counter(row[9] for row in satirlar))

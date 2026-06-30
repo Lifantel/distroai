@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import csv
+from sklearn.model_selection import train_test_split
 
 # ---------------------------------------------------------
 # 1. MODEL TANIMLAMASI VE EĞİTİM VERİSİ
@@ -20,6 +21,8 @@ distro_isimleri = {
     3: "CachyOS",
     4: "Arch Linux",
     5: "openSUSE",
+    6: "Pop!_OS",
+    7: "Kali Linux"
 }
 
 X_list, Y_list = [], []
@@ -27,14 +30,18 @@ with open("dataset.csv", "r") as f:
     reader = csv.reader(f)
     next(reader)  # başlık satırını ("q1,q2,...,label") atla
     for row in reader:
-        X_list.append([float(v) for v in row[:8]])
-        Y_list.append(int(row[8]))
+        X_list.append([float(v) for v in row[:9]])
+        Y_list.append(int(row[9]))
 
 X = torch.tensor(X_list, dtype=torch.float32)
 Y = torch.tensor(Y_list, dtype=torch.long)
 
+X_train, X_val, Y_train, Y_val = train_test_split(
+    X, Y, test_size=0.2, random_state=42, stratify=Y
+)
+
 class DistroAI(nn.Module):
-    def __init__(self, input_size=8, num_classes=6, dropout=0.2):
+    def __init__(self, input_size=9, num_classes=8, dropout=0.2):
         super(DistroAI, self).__init__()
         self.network = nn.Sequential(
             nn.Linear(input_size, 32),
@@ -49,7 +56,7 @@ class DistroAI(nn.Module):
     def forward(self, x):
         return self.network(x)
 model = DistroAI()
-criterion = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
 optimizer = optim.Adam(model.parameters(), lr=0.01, weight_decay=1e-4)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=300, gamma=0.5)
 
@@ -81,6 +88,7 @@ sorular = [
     "6. Sistemin çok az RAM ve CPU tüketmesi sizin için kritik mi? (E/H): ",
     "7. Macera/özelleştirme istiyor musunuz? (E/H): ",
     "8. Büyük bir şirket desteği olsun mu? (E/H): ",
+    "9. Siber güvenlik veya penetrasyon testi yapmak istiyor musunuz? (E/H): "
 ]
 
 kullanici_cevaplari = []
