@@ -14,17 +14,18 @@ from collections import Counter, defaultdict
 # q8: Büyük şirket desteği önemli mi
 # q9: Siber güvenlik / pentest ilgisi
 # q10: Windows a benzer olsun mu
+# q11 Usb üzerinden çalışmasını istiyormusunuz?
 
 agirliklar = {
     #               q1   q2   q3   q4   q5   q6   q7   q8   q9
-    0: [          -1,  -1,  -1,  -1,   0,   2,  -1,   0,  -1,  2],  # Linux Mint
-    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,  -1, -1],  # Ubuntu
-    2: [           1,   1,   2,   0,  -1,   0,   2,   1,  -1,  0],  # Fedora
-    3: [           1,   1,   1,   2,   1,  -1,   0,  -1,  -1,  0],  # CachyOS
-    4: [           2,   1,   1,   0,   0,   0,   2,  -1,  -1,  0],  # Arch Linux
-    5: [           1,  -1,  -1,  -1,   0,   1,   0,   2,  -1,  0],  # openSUSE
-    6: [          -1,   1,   0,   2,   2,  -1,  -1,   1,  -1, -1],  # Pop!_OS
-    7: [           2,   0,   0,  -1,   0,  -1,   1,  -1,   3, -1],  # Kali Linux
+    0: [          -1,  -1,  -1,  -1,   0,   2,  -1,   0,  -1,  2, -1],  # Linux Mint
+    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,  -1, -1, -1],  # Ubuntu
+    2: [           1,   1,   2,   0,  -1,   0,   2,   1,  -1,  0, -1],  # Fedora
+    3: [           1,   1,   1,   2,   1,  -1,   0,  -1,  -1,  0, -1],  # CachyOS
+    4: [           2,   1,   1,   0,   0,   0,   2,  -1,  -1,  0,  2],  # Arch Linux
+    5: [           1,  -1,  -1,  -1,   0,   1,   0,   2,  -1,  0, -1],  # openSUSE
+    6: [          -1,   1,   0,   2,   2,  -1,  -1,   1,  -1, -1, -1],  # Pop!_OS
+    7: [           2,   0,   0,  -1,   0,  -1,   1,  -1,   4, -1,  2],  # Kali Linux
 }
 
 distro_isimleri = {
@@ -41,7 +42,7 @@ def etiketle(cevaplar):
     return en_iyi_label
 
 vektor_havuzu = defaultdict(list)
-for cevaplar in itertools.product([0, 1], repeat=10):
+for cevaplar in itertools.product([0, 1], repeat=11):
     label = etiketle(cevaplar)
     vektor_havuzu[label].append(cevaplar)
 
@@ -60,15 +61,15 @@ random.shuffle(satirlar)
 
 with open("dataset.csv", "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","label"])
+    writer.writerow(["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","label"])
     writer.writerows(satirlar)
 
 
 kontrol = {}
 celiski = 0
 for row in satirlar:
-    anahtar = tuple(row[:10])
-    etiket = row[10]
+    anahtar = tuple(row[:11])
+    etiket = row[11]
     if anahtar in kontrol and kontrol[anahtar] != etiket:
         celiski += 1
     kontrol[anahtar] = etiket
@@ -76,4 +77,4 @@ for row in satirlar:
 print("\nToplam satır:", len(satirlar))
 print("Çelişkili satır sayısı:", celiski)
 print("\nSınıf dağılımı (dataset.csv içinde):")
-print(Counter(row[10] for row in satirlar))
+print(Counter(row[11] for row in satirlar))
