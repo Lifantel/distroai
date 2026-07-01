@@ -18,8 +18,8 @@ Arch, openSUSE) hangisinin en uygun olduğunu yüzdelik olasılıklarla
 gösterir.
 
 Not: datauret.py dosyasındaki ağrlıkları değiştirerek modelin çıktılarını da 
-değiştirirsiniz bir soruda bir distro için ne kadar çok ağrlık verirseniz o 
-soruda o kadar daha çok o distroyu ödülllendirir cezalandırırsanızda bir o kadar cezalandırır.
+değiştirirsiniz bir soruda bir distro için ne kadar çok puan verirseniz o 
+soruda o kadar daha çok o distroyu ödülllendirir. o puanı düşürürseniz bir o kadar cezalandırır.
 
 ## Desteklenen Dağıtımlar
 
@@ -68,6 +68,4 @@ yeterlidir.
 
 ## Not
 
-Dataset Claude ile yazılmıştır. Eğitim verisi küçük örneklerden oluştuğundan, yapay
-nöron her zaman mükemmel sonuç vermeyebilir. Daha fazla örnek eklemek
-kararlarını daha tutarlı hale getirir.
+distroai.py yi çalıştırmadan önce datauret.py i çalıstırarak dataset oluşturmalısınız.
