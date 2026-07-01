@@ -15,10 +15,11 @@ alarak bir öneri sunar.
 
 Model, deneyim seviyesi, donanım gücü, kararlılık tercihi, oyun/performans
 ihtiyacı, NVIDIA ekran kartı varlığı, düşük kaynak tüketimi önemi, macera
-isteği ve kurumsal destek beklentisi gibi sekiz farklı soruya verilen
+isteği ve kurumsal destek beklentisi gibi soruya verilen
 evet/hayır cevaplarını sayısal bir vektöre çevirir ve bu vektörü ağdan
 geçirir. Çıktı olarak altı dağıtımdan (Mint, Ubuntu, Fedora, CachyOS,
-Arch, openSUSE) hangisinin en uygun olduğunu yüzdelik olasılıklarla
+Arch, openSUSE ...
+) hangisinin en uygun olduğunu yüzdelik olasılıklarla
 gösterir.
 
 Not: datauret.py dosyasındaki ağrlıkları değiştirerek modelin çıktılarını da 
