@@ -1,5 +1,5 @@
 
-# Linux Distro Tavsiye Yapay Nöronu
+# Linux Distro Tavsiye Yapay Nöron Ağları
 
 Bu proje, kullanıcıya sorduğu 8 soruya göre hangi Linux dağıtımının
 ona daha uygun olduğunu tahmin eden basit bir yapay nöron modelidir.
