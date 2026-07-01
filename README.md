@@ -70,7 +70,3 @@ Kendi bilgisayarınıza kurulum yapmadan denemek isteyenler, dosyayı
 Google Colab'a yükleyip orada da çalıştırabilir. Colab üzerinde PyTorch
 zaten hazır geldiği için sadece kodu bir hücreye yapıştırıp çalıştırmak
 yeterlidir.
-
-## Not
-
-distroai.py yi çalıştırmadan önce datauret.py i çalıstırarak dataset oluşturmalısınız.
