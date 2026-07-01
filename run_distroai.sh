@@ -5,7 +5,6 @@ set -e
 
 echo "DistroAI Kurulum ve Çalıştırma Betiği"
 
-# 1. Sanal ortamı oluştur
 if [ ! -d "venv" ]; then
     echo "Python sanal ortamı (venv) oluşturuluyor..."
     python3 -m venv venv
