@@ -2,11 +2,10 @@
 
 set -e
 
-
 echo "DistroAI Kurulum ve Çalıştırma Betiği"
 
 if [ ! -d "venv" ]; then
-    echo "Python sanal ortamı (venv) oluşturuluyor..."
+    echo "Python sanal ortamı oluşturuluyor..."
     python3 -m venv venv
 else
     echo "Sanal ortam zaten mevcut."
@@ -27,18 +26,19 @@ if [ ! -d "$REPO_DIR" ]; then
     git clone "$REPO_URL" "$REPO_DIR"
     cd "$REPO_DIR"
 else
-    echo "Klasör zaten mevcut, güncel kodlar çekiliyor (git pull)..."
+    echo "Klasör zaten mevcut, güncel kodlar çekiliyor..."
     cd "$REPO_DIR"
     git pull
 fi
+echo "src klasörüne geçiş yapılıyor..."
+cd src
 if [ -f "requirements.txt" ]; then
     echo "requirements.txt dosyası bulundu, bağımlılıklar kontrol ediliyor..."
     pip install -r requirements.txt
 fi
-
 if [ -f "distroai.py" ]; then
     echo "DistroAI başarıyla başlatılıyor..."
-    python3 distroai.py
+    python distroai.py
 else
     echo "Hata: distroai.py dosyası bulunamadı!"
     exit 1
