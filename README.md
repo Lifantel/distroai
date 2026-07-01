@@ -17,7 +17,7 @@ geçirir. Çıktı olarak altı dağıtımdan (Mint, Ubuntu, Fedora, CachyOS,
 Arch, openSUSE) hangisinin en uygun olduğunu yüzdelik olasılıklarla
 gösterir.
 
-Not: Datauret.py dosyasındaki ağrlıkları değiştirerek modelin çıktılarını da 
+Not: datauret.py dosyasındaki ağrlıkları değiştirerek modelin çıktılarını da 
 değiştirirsiniz bir soruda bir distro için ne kadar çok ağrlık verirseniz o 
 soruda o kadar daha çok o distroyu ödülllendirir cezalandırırsanızda bir o kadar cezalandırır.
 
