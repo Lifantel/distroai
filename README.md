@@ -32,12 +32,29 @@ soruda o kadar daha çok o distroyu ödülllendirir cezalandırırsanızda bir o
 - Pop_OS
 - Kali Linux
 
-## Çalıştırma
+## Çalıştırma (Bu Linux için yapılan run_distroai.sh dosyasını anlatır)
+
+run_distroai.sh ile biten dosyayı ve aynı klasörde terminalinizi açın.
+
+1. Çalıştırma İzni Verin:
+Terminali açın ve indirdiğiniz veya oluşturduğunuz dosyanın bulunduğu dizine giderek dosyaya çalıştırma yetkisi verin:
 
 ```bash
-pip install torch
-python3 distroai.py
+chmod +x run_distroai.sh
 ```
+
+2. Betiği Çalıştırın:
+Ardından betiği çalıştırmanız yeterlidir:
+
+```bash
+./run_distroai.sh
+```
+
+Betik Nasıl Çalışır?
+İlk çalıştırmada bulunduğunuz dizinde temiz bir venv klasörü (sanal ortam) oluşturur.
+Sanal ortamı aktif hale getirerek sisteminizdeki global paketleri kirletmeden torch (PyTorch) ve scikit-learn kütüphanelerini yükler.
+Verdiğiniz GitHub reposunu distroai_repo adında bir klasöre klonlar. Eğer bu klasör zaten varsa, kodların en güncel halini almak için git pull yapar.
+Son olarak hedef klasörün içine girerek yapay zeka uygulamanız olan distroai.py dosyasını otomatik olarak başlatır.
 
 Sorulara `E` (Evet) veya `H` (Hayır) yazarak cevap verin, model size
 en uygun dağıtımı ve diğer ihtimalleri yüzde olarak gösterecektir.
