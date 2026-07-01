@@ -1,4 +1,8 @@
 
+> [!IMPORTANT]
+> distroai.py yi çalıştırmadan önce datauret.py i çalıstırarak dataset oluşturmalısınız. Oluşturmak istemiyorsanız hazır dataset.csv yi kullanabilirsiniz
+
+
 # Linux Distro Tavsiye Yapay Nöron Ağları
 
 Bu proje, kullanıcıya sorduğu 8 soruya göre hangi Linux dağıtımının
