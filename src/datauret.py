@@ -20,18 +20,19 @@ from collections import Counter, defaultdict
 agirliklar = {
     #               q1   q2   q3   q4   q5   q6   q7   q8   q9 q10 q11 q12
     0: [          -1,  -1,  -1,  -1,   0,   2,  -1,   0,  -1,  2, -1,  0],  # Linux Mint
-    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,  -1, -1, -1,  0],  # Ubuntu
+    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,   0, -1, -1,  0],  # Ubuntu
     2: [           1,   1,   2,   0,  -1,   0,   2,   1,  -1,  0, -1,  0],  # Fedora
     3: [           1,   1,   1,   2,   1,  -1,   0,  -1,  -1,  0, -1,  0],  # CachyOS
     4: [           2,   0,   1,   0,   0,   1,   2,  -1,  -1,  0,  2, -4],  # Arch Linux
-    5: [           0,  -1,  -1,  -1,   0,   1,   0,   2,  -1,  0, -1,  0],  # openSUSE
+    5: [           0,  -1,  -1,  -1,   0,   1,   1,   2,  -1,  0, -1,  0],  # openSUSE
     6: [          -1,   1,   0,   2,   2,  -1,  -1,   1,  -1, -1, -1,  0],  # Pop!_OS
     7: [           2,   0,   0,  -1,   0,  -1,   1,  -1,   4, -1,  2,  0],  # Kali Linux
+    8: [          -1,   1,  -1,  -1,   0,   0,  -1,   2,   0,  0, -1,  0],  # Pardus
 }
 
 distro_isimleri = {
     0: "Linux Mint", 1: "Ubuntu", 2: "Fedora", 3: "CachyOS",
-    4: "Arch Linux", 5: "openSUSE", 6: "Pop!_OS", 7: "Kali Linux"
+    4: "Arch Linux", 5: "openSUSE", 6: "Pop!_OS", 7: "Kali Linux", 8: "Pardus"
 }
 
 def etiketle(cevaplar):

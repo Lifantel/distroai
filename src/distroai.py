@@ -20,7 +20,8 @@ distro_isimleri = {
     4: "Arch Linux",
     5: "openSUSE",
     6: "Pop!_OS",
-    7: "Kali Linux"
+    7: "Kali Linux",
+    8: "Pardus"
 }
 
 X_list, Y_list = [], []
@@ -39,7 +40,7 @@ X_train, X_val, Y_train, Y_val = train_test_split(
 )
 
 class DistroAI(nn.Module):
-    def __init__(self, input_size=12, num_classes=8, dropout=0.2):
+    def __init__(self, input_size=12, num_classes=9, dropout=0.2):
         super(DistroAI, self).__init__()
         self.network = nn.Sequential(
             nn.Linear(input_size, 32),
@@ -78,7 +79,7 @@ for epoch in range(EPOCHS):
         model.train()
 
 model.eval() 
-print("LINUX DISTRO TAVSİYE YAPAY ZEKASINA HOŞ GELDİNİZ")
+print("\nLINUX DISTRO TAVSİYE YAPAY ZEKASINA HOŞ GELDİNİZ")
 print("Lütfen soruları 'E' (Evet) veya 'H' (Hayır) olarak yanıtlayın.\n")
 
 sorular = [
