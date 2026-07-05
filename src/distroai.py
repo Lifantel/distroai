@@ -21,7 +21,8 @@ distro_isimleri = {
     5: "openSUSE",
     6: "Pop!_OS",
     7: "Kali Linux",
-    8: "Pardus"
+    8: "Pardus",
+    9: "Tails"
 }
 
 X_list, Y_list = [], []
@@ -29,8 +30,8 @@ with open("dataset.csv", "r") as f:
     reader = csv.reader(f)
     next(reader)  # başlık satırını ("q1,q2,...,label") atla
     for row in reader:
-        X_list.append([float(v) for v in row[:13]])
-        Y_list.append(int(row[13]))
+        X_list.append([float(v) for v in row[:14]])
+        Y_list.append(int(row[14]))
 
 X = torch.tensor(X_list, dtype=torch.float32)
 Y = torch.tensor(Y_list, dtype=torch.long)
@@ -40,7 +41,7 @@ X_train, X_val, Y_train, Y_val = train_test_split(
 )
 
 class DistroAI(nn.Module):
-    def __init__(self, input_size=13, num_classes=9, dropout=0.2):
+    def __init__(self, input_size=14, num_classes=10, dropout=0.2):
         super(DistroAI, self).__init__()
         self.network = nn.Sequential(
             nn.Linear(input_size, 32),
@@ -95,7 +96,8 @@ sorular = [
     "10. Windows benzeri olsun mu? (E/H):",
     "11. Usb üzerinde çalışabilsinmi (E/H):",
     "12. Sağlıklı bir yaşam istiyormusun? (E/H):",
-    "13. Biraz daha mobile, laptop uyumlu bir arayüz istiyormusun? (E/H):"
+    "13. Biraz daha mobile, laptop uyumlu bir arayüz istiyormusun? (E/H):",
+    "14. Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz (Sadece USB üzerinden çalışan TailsOS e yönlendirir)? (E/H):"
 ]
 
 kullanici_cevaplari = []

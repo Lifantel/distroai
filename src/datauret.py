@@ -17,23 +17,25 @@ from collections import Counter, defaultdict
 # q11 Usb üzerinden çalışmasını istiyormusunuz?
 # q12 Sağlıklı bir yaşam istiyormusun?
 # q13 Biraz daha mobile, laptop uyumlu bir arayüz istiyormusun?
+# q14 Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz (Sadece USB üzerinden çalışan TailsOS e yönlendirir)?
 
 agirliklar = {
-    #               q1   q2   q3   q4   q5   q6   q7   q8   q9 q10 q11 q12 q13
-    0: [          -1,  -1,  -1,  -1,   0,   2,  -1,   0,  -1,  2, -1,  0,  -1],  # Linux Mint
-    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,   0, -1, -1,  0,   2],  # Ubuntu
-    2: [           1,   1,   2,   0,  -1,   0,   2,   1,  -1,  0, -1,  0,   1],  # Fedora
-    3: [           1,   1,   1,   2,   1,  -1,   0,  -1,  -1,  0, -1,  0,   0],  # CachyOS
-    4: [           2,   0,   1,   0,   0,   1,   2,  -1,  -1,  0,  2, -4,   0],  # Arch Linux
-    5: [           0,  -1,  -1,  -1,   0,   1,   1,   2,  -1,  0, -1,  0,   1],  # openSUSE
-    6: [          -1,   1,   0,   2,   2,  -1,  -1,   1,  -1, -1, -1,  0,   0],  # Pop!_OS
-    7: [           2,   0,   0,  -1,   0,  -1,   1,  -1,   4, -1,  2,  0,  -1],  # Kali Linux
-    8: [          -1,   1,  -1,  -1,   0,   0,  -1,   2,   0,  0, -1,  0,   1],  # Pardus
+    #               q1   q2   q3   q4   q5   q6   q7   q8   q9 q10 q11 q12 q13 q14
+    0: [          -1,  -1,  -1,  -1,   0,   2,  -1,   0,  -1,  2, -1,  0,  -1, -4],  # Linux Mint
+    1: [          -1,   0,  -1,  -1,   0,   0,  -1,   2,   0, -1, -1,  0,   2, -4],  # Ubuntu
+    2: [           1,   1,   2,   0,  -1,   0,   2,   1,  -1,  0, -1,  0,   1, -4],  # Fedora
+    3: [           1,   1,   1,   2,   1,  -1,   0,  -1,  -1,  0, -1,  0,   0, -4],  # CachyOS
+    4: [           2,   0,   1,   0,   0,   1,   2,  -1,  -1,  0,  2, -4,   0, -4],  # Arch Linux
+    5: [           0,  -1,  -1,  -1,   0,   1,   1,   2,  -1,  0, -1,  0,   1, -4],  # openSUSE
+    6: [          -1,   1,   0,   2,   2,  -1,  -1,   1,  -1, -1, -1,  0,   0, -4],  # Pop!_OS
+    7: [           2,   0,   0,  -1,   0,  -1,   1,  -1,   4, -1,  2,  0,  -1, -4],  # Kali Linux
+    8: [          -1,   1,  -1,  -1,   0,   0,  -1,   2,   0,  0, -1,  0,   1, -4],  # Pardus
+    9: [           0,   0,   0,   0,   0,   0,   0,   0,   0,  0,  0,  0,   0,  5],  # Tails
 }
 
 distro_isimleri = {
     0: "Linux Mint", 1: "Ubuntu", 2: "Fedora", 3: "CachyOS",
-    4: "Arch Linux", 5: "openSUSE", 6: "Pop!_OS", 7: "Kali Linux", 8: "Pardus"
+    4: "Arch Linux", 5: "openSUSE", 6: "Pop!_OS", 7: "Kali Linux", 8: "Pardus", 9: "Tails"
 }
 
 def etiketle(cevaplar):
@@ -45,7 +47,7 @@ def etiketle(cevaplar):
     return en_iyi_label
 
 vektor_havuzu = defaultdict(list)
-for cevaplar in itertools.product([0, 1], repeat=13):
+for cevaplar in itertools.product([0, 1], repeat=14):
     label = etiketle(cevaplar)
     vektor_havuzu[label].append(cevaplar)
 
@@ -64,15 +66,15 @@ random.shuffle(satirlar)
 
 with open("dataset.csv", "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","label"])
+    writer.writerow(["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","label"])
     writer.writerows(satirlar)
 
 
 kontrol = {}
 celiski = 0
 for row in satirlar:
-    anahtar = tuple(row[:13])
-    etiket = row[13]
+    anahtar = tuple(row[:14])
+    etiket = row[14]
     if anahtar in kontrol and kontrol[anahtar] != etiket:
         celiski += 1
     kontrol[anahtar] = etiket
@@ -80,4 +82,4 @@ for row in satirlar:
 print("\nToplam satır:", len(satirlar))
 print("Çelişkili satır sayısı:", celiski)
 print("\nSınıf dağılımı (dataset.csv içinde):")
-print(Counter(row[13] for row in satirlar))
+print(Counter(row[14] for row in satirlar))
