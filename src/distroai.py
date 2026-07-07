@@ -7,10 +7,6 @@ import torch.optim as optim
 import csv
 from sklearn.model_selection import train_test_split
 
-# ---------------------------------------------------------
-# 1. MODEL TANIMLAMASI VE EĞİTİM VERİSİ
-# ---------------------------------------------------------
-# Soru Mantığı (Evet=1, Hayır=0):
 
 distro_isimleri = {
     0: "Linux Mint",
@@ -81,34 +77,37 @@ for epoch in range(EPOCHS):
 
 model.eval() 
 print("\nLINUX DISTRO TAVSİYE YAPAY ZEKASINA HOŞ GELDİNİZ")
-print("Lütfen soruları 'E' (Evet) veya 'H' (Hayır) olarak yanıtlayın.\n")
+print("Lütfen soruları 1 ile 5 arasında bir puanla yanıtlayın:")
+print("  1 = Kesinlikle Hayır   2 = Hayır   3 = Kararsızım   4 = Evet   5 = Kesinlikle Evet\n")
 
 sorular = [
-    "1. Daha önce Linux veya terminal kullandınız mı? (E/H): ",
-    "2. Bilgisayarınız güncel ve donanımı güçlü mü? (E/H): ",
-    "3. Sistemin kararlı olmasındansa, en yeni güncellemeleri almak daha mı önemli? (E/H): ",
-    "4. Bu sistemi yoğun şekilde oyun veya performans odaklı işler için mi kuruyorsunuz? (E/H): ",
-    "5. Bilgisayarınızda NVIDIA ekran kartı var mı? (E/H): ",
-    "6. Sistemin çok az RAM ve CPU tüketmesi sizin için kritik mi? (E/H): ",
-    "7. Macera/özelleştirme istiyor musunuz? (E/H): ",
-    "8. Büyük bir şirket desteği olsun mu? (E/H): ",
-    "9. Siber güvenlik veya penetrasyon testi yapmak istiyor musunuz? (E/H): ",
-    "10. Windows benzeri olsun mu? (E/H):",
-    "11. Usb üzerinde çalışabilsinmi (E/H):",
-    "12. Sağlıklı bir yaşam istiyormusun? (E/H):",
-    "13. Biraz daha mobile, laptop uyumlu bir arayüz istiyormusun? (E/H):",
-    "14. Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz (Sadece USB üzerinden çalışan TailsOS e yönlendirir)? (E/H):"
+    "1. Daha önce Linux veya terminal kullandınız mı? (1-5): ",
+    "2. Bilgisayarınız güncel ve donanımı güçlü mü? (1-5): ",
+    "3. Sistemin kararlı olmasındansa, en yeni güncellemeleri almak daha mı önemli? (1-5): ",
+    "4. Bu sistemi yoğun şekilde oyun veya performans odaklı işler için mi kuruyorsunuz? (1-5): ",
+    "5. Bilgisayarınızda NVIDIA ekran kartı var mı? (1-5): ",
+    "6. Sistemin çok az RAM ve CPU tüketmesi sizin için kritik mi? (1-5): ",
+    "7. Macera/özelleştirme istiyor musunuz? (1-5): ",
+    "8. Büyük bir şirket desteği olsun mu? (1-5): ",
+    "9. Siber güvenlik veya penetrasyon testi yapmak istiyor musunuz? (1-5): ",
+    "10. Windows benzeri olsun mu? (1-5): ",
+    "11. Usb üzerinde çalışabilsin mi? (1-5): ",
+    "12. Sağlıklı bir yaşam istiyor musun? (1-5): ",
+    "13. Biraz daha mobile, laptop uyumlu bir arayüz istiyor musun? (1-5): ",
+    "14. Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz (Sadece USB üzerinden çalışan TailsOS'a yönlendirir)? (1-5): "
 ]
+
+SKALA_HARITASI = {1: 0.0, 2: 0.25, 3: 0.5, 4: 0.75, 5: 1.0}
 
 kullanici_cevaplari = []
 
 for soru in sorular:
     while True:
-        cevap = input(soru).strip().upper()
-        if cevap in ['E', 'H']:
-            kullanici_cevaplari.append(1.0 if cevap == 'E' else 0.0)
+        cevap = input(soru).strip()
+        if cevap in ['1', '2', '3', '4', '5']:
+            kullanici_cevaplari.append(SKALA_HARITASI[int(cevap)])
             break
-        print("Lütfen sadece 'E' veya 'H' giriniz!")
+        print("Lütfen 1 ile 5 arasında bir sayı giriniz!")
 
 girdi_vektoru = torch.tensor([kullanici_cevaplari], dtype=torch.float32)
 
