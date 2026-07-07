@@ -45,22 +45,27 @@ def etiketle(cevaplar):
         if en_iyi_puan is None or puan > en_iyi_puan:
             en_iyi_puan, en_iyi_label = puan, label
     return en_iyi_label
-
-vektor_havuzu = defaultdict(list)
-for cevaplar in itertools.product([0, 1], repeat=14):
-    label = etiketle(cevaplar)
-    vektor_havuzu[label].append(cevaplar)
-
-print("Her sınıfın kapladığı benzersiz vektör sayısı:")
-for l in sorted(vektor_havuzu):
-    print(f"  {distro_isimleri[l]}: {len(vektor_havuzu[l])}")
+SKALA = [0.0, 0.25, 0.5, 0.75, 1.0]
 random.seed(42)
 HEDEF_HER_SINIF = 1000
+MAX_DENEME = 3_000_000
+
+sinif_sayaci = Counter()
 satirlar = []
-for label, vektorler in vektor_havuzu.items():
-    for _ in range(HEDEF_HER_SINIF):
-        secilen = random.choice(vektorler)
-        satirlar.append(list(secilen) + [label])
+deneme = 0
+while deneme < MAX_DENEME and min(sinif_sayaci.get(l, 0) for l in agirliklar) < HEDEF_HER_SINIF:
+    deneme += 1
+    cevaplar = tuple(random.choice(SKALA) for _ in range(14))
+    label = etiketle(cevaplar)
+    if sinif_sayaci[label] >= HEDEF_HER_SINIF:
+        continue
+    satirlar.append(list(cevaplar) + [label])
+    sinif_sayaci[label] += 1
+
+print("Ornekleme bitti. Deneme sayisi:", deneme)
+print("Her sinifin topladigi ornek sayisi:")
+for l in sorted(agirliklar):
+    print(f"  {distro_isimleri[l]}: {sinif_sayaci.get(l, 0)}")
 
 random.shuffle(satirlar)
 
