@@ -5,7 +5,7 @@
 
 # Linux Distro Tavsiye Yapay Nöron Ağları
 
-Bu proje, kullanıcıya sorduğu 8 soruya göre hangi Linux dağıtımının
+Bu proje, kullanıcıya sorduğu 13 soruya göre hangi Linux dağıtımının
 ona daha uygun olduğunu tahmin eden basit bir yapay nöron modelidir.
 PyTorch ile yazılmış küçük bir yapay nöron ağı, önceden hazırlanmış
 örnek profiller üzerinden eğitilir ve ardından kullanıcının cevaplarını
@@ -15,11 +15,8 @@ alarak bir öneri sunar.
 
 Model, deneyim seviyesi, donanım gücü, kararlılık tercihi, oyun/performans
 ihtiyacı, NVIDIA ekran kartı varlığı, düşük kaynak tüketimi önemi, macera
-isteği ve kurumsal destek beklentisi gibi soruya verilen
-evet/hayır cevaplarını sayısal bir vektöre çevirir ve bu vektörü ağdan
-geçirir. Çıktı olarak altı dağıtımdan (Mint, Ubuntu, Fedora, CachyOS,
-Arch, openSUSE ...
-) hangisinin en uygun olduğunu yüzdelik olasılıklarla
+isteği ve kurumsal destek beklentisi gibi soruya verilen puanlama cevaplarını sayısal bir vektöre çevirir ve bu vektörü ağdan
+geçirir. Çıktı olarak dağıtımlardan hangisinin en uygun olduğunu yüzdelik olasılıklarla
 gösterir.
 
 Not: datauret.py dosyasındaki ağrlıkları değiştirerek modelin çıktılarını da 
@@ -61,7 +58,7 @@ Sanal ortamı aktif hale getirerek sisteminizdeki global paketleri kirletmeden t
 Verdiğiniz GitHub reposunu distroai_repo adında bir klasöre klonlar. Eğer bu klasör zaten varsa, kodların en güncel halini almak için git pull yapar.
 Son olarak hedef klasörün içine girerek yapay zeka uygulamanız olan distroai.py dosyasını otomatik olarak başlatır.
 
-Sorulara `E` (Evet) veya `H` (Hayır) yazarak cevap verin, model size
+Sorulara 1,2,3,4,5 yazarak cevap verin, model size
 en uygun dağıtımı ve diğer ihtimalleri yüzde olarak gösterecektir.
 
 ## Hızlı Test İçin
