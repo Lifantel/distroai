@@ -33,6 +33,8 @@ soruda o kadar daha çok o distroyu ödülllendirir. o puanı düşürürseniz b
 - openSUSE
 - Pop_OS
 - Kali Linux
+- Pardus
+- Tails
 
 ## Çalıştırma (Bu Linux için yapılan run_distroai.sh dosyasını anlatır)
 
