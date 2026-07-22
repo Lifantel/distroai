@@ -55,7 +55,6 @@ model = DistroAI()
 criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
 optimizer = optim.Adam(model.parameters(), lr=0.01, weight_decay=1e-4)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=300, gamma=0.5)
-
 EPOCHS = 1000
 model.train()
 for epoch in range(EPOCHS):
@@ -94,7 +93,7 @@ sorular = [
     "11. Usb üzerinde çalışabilsin mi? (1-5): ",
     "12. Sağlıklı bir yaşam istiyor musun? (1-5): ",
     "13. Biraz daha mobile, laptop uyumlu bir arayüz istiyor musun? (1-5): ",
-    "14. Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz (Sadece USB üzerinden çalışan TailsOS'a yönlendirir)? (1-5): "
+    "14. Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz? (Sadece USB üzerinden çalışan TailsOS'a yönlendirir) (1-5): "
 ]
 
 SKALA_HARITASI = {1: 0.0, 2: 0.25, 3: 0.5, 4: 0.75, 5: 1.0}
