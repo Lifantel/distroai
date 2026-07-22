@@ -17,7 +17,7 @@ from collections import Counter, defaultdict
 # q11 Usb üzerinden çalışmasını istiyormusunuz?
 # q12 Sağlıklı bir yaşam istiyormusun?
 # q13 Biraz daha mobile, laptop uyumlu bir arayüz istiyormusun?
-# q14 Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz (Sadece USB üzerinden çalışan TailsOS e yönlendirir)?
+# q14 Tamamen anonimlik ve iz bırakmamayı mı amaçlıyorsunuz? (Sadece USB üzerinden çalışan TailsOS e yönlendirir)
 
 agirliklar = {
     #               q1   q2   q3   q4   q5   q6   q7   q8   q9 q10 q11 q12 q13 q14
