@@ -1,6 +1,6 @@
 
 > [!IMPORTANT]
-> distroai.py yi çalıştırmadan önce datauret.py i çalıstırarak dataset oluşturmalısınız. Oluşturmak istemiyorsanız hazır dataset.csv yi kullanabilirsiniz
+> distroai.py yi çalıştırmadan önce datauret.py i çalıstırarak dataset oluşturmalısınız. Oluşturmak istemiyorsanız hazır dataset.csv yi kullanabilirsiniz. Colabda çalıştırıken içerisine dataseti de atmalısınız.
 
 
 # Linux Distro Tavsiye Yapay Nöron Ağları
