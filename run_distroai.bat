@@ -27,14 +27,11 @@ if not exist %REPO_DIR% (
     cd %REPO_DIR%
     git pull
 )
-
 cd src
-
 if exist requirements.txt (
     echo Pip requirements...
     pip install -r requirements.txt
 )
-
 if exist distroai.py (
     python distroai.py
 ) else (
